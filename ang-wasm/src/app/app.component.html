@@ -1,0 +1,29 @@
+<input type="number" [(ngModel)]="iterations">
+<button (click)="processCalculation(iterations)">Process Calculation</button>
+
+<table>
+  <thead>
+    <th></th>
+    <th>JS</th>
+    <th></th>
+    <th>RUST</th>
+    <th></th>
+    <th>Diff</th>
+  </thead>
+  <tbody *ngIf="fibRustResult.length !== 0">
+    <tr>
+      <td>Result</td>
+      <td>Time</td>
+      <td>Result</td>
+      <td>Time</td>
+    </tr>
+    <tr *ngFor="let fibR of fibJsResult; let i = index">
+      <td>{{fibR.result}}</td>
+      <td>{{fibR.time | number: '1.1-3'}}</td>
+      <td>{{fibRustResult[i]?.result}}</td>
+      <td>{{fibRustResult[i]?.time | number: '1.1-3'}}</td>
+      <td>{{getRate(fibR.time, fibRustResult[i].time) | number: '1.1-5'}} %</td>
+    </tr>
+  </tbody>
+</table>
+
